@@ -1,0 +1,96 @@
+<div class="container flex-column my-3">
+    <div class="row">
+        <div class="col-md">
+            <h2>All you need to know about  Angular Template driven forms</h2>
+            <p>Angular support two design apporached for interactive forms</p>
+            <ol>
+                <li>
+                    Template driven forms: Form build by writing templates (basically HTML) using Angular template
+                    syntax and directives. This approach is used while designing the simple forms.
+                </li>
+                <li>
+                    Reactive forms: Reactive forms provide a model-driven approach to handling form inputs whose values
+                    change over time. It is used while designing more complex forms.
+                </li>
+            </ol>
+            <div class="alert is-helpful">
+                Template-driven forms are just model-driven forms but driven by
+                directives in the the template versus code in the component. In
+                template-driven we use directives to create the model.
+            </div>
+            <ul>
+                <li>Required module: FormsModule</li>
+                <li>Other useful utilities: <kbd>ng-bootstrap, material forms</kbd></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="py-2 text-primary">Basic user form</h4>
+            <form #f="ngForm" (ngSubmit)="f.valid && save(f)">
+                <!-- by default FormsModule attach NgForm directive to "form" tag -->
+                <!--"#f" is a local varible and we assign ngForm to it.-->
+                <!--"ngSubmit comes with ngForm directive. The two main part of ngForm directive are 1) FormGroup and 2) FormControl-->
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input #firstName="ngModel" ngModel name="firstName" id="firstName" type="text" class="form-control"
+                        placeholder="Enter First Name" required />
+                    <div *ngIf="firstName.touched && firstName.invalid" class="alert alert-danger">
+                        First Name is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input #lastName="ngModel" ngModel name="lastName" id="lastName" type="text" class="form-control"
+                        placeholder="Enter Last Name" required />
+                    <div *ngIf="lastName.touched && lastName.invalid" class="alert alert-danger">
+                        Last Name is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input #age="ngModel" ngModel name="age" id="age" type="text" class="form-control"
+                        placeholder="Enter Age" required />
+                    <div *ngIf="age.touched && age.invalid" class="alert alert-danger">
+                        Age is required
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-outline-secondary ml-2" (click)="onClear(f)">
+                    Clear
+                </button>
+            </form>
+
+            <!--Success and Error Messages-->
+            <div *ngIf="f.submitted && f.invalid" class="alert is-critical" role="alert">
+                <span>Form is invalid.</span>
+            </div>
+
+            <!--Alert with close-->
+            <div *ngIf="sucessMessage != null" class="alert is-helpful mt-3" role="alert">
+                <span>{{ sucessMessage }}</span>
+                <button type="button ml-auto" class="close" aria-label="Close" (click)="onCloseMsg()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-6 border-left py-3">
+            <h4 class="py-2 text-primary">Different ways to access form</h4>
+            <h6>1. Using template variable - "#[variableName]"</h6>
+            <p>First Name: {{ firstName.value }}</p>
+            <p>Last Name: {{ lastName.value }}</p>
+            <p>Age: {{ age.value }}</p>
+
+            <hr />
+            <h6>2. Using NgForm passed to template variable - "f.value"</h6>
+            <p>{{ f.value | json }}</p>
+
+            <hr />
+            <h6>
+                3. Using controls an attribute of NgForm - "f.controls[inputName].value"
+            </h6>
+            <p>Fisrst Name: {{ f.controls["firstName"].value }}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="container flex-column py-3">
+    <div class="row">
+        <div class="col-md">
+            <h1>All you need to know about Reactive Forms in Angular</h1>
+            <span class="badge is-badge">Angular</span>
+            <ul class="list-unstyled">
+                <li>By thinklets</li>
+                <li>Posted on Aug 15, 2020</li>
+            </ul>
+            <h2>Introduction</h2>
+            <p>Angular supports two design apporaches for interactive forms</p>
+            <ol>
+                <li>
+                    Template driven forms: Form build by writing templates (basically
+                    HTML) using Angular template syntax and directives. This approach is
+                    used while designing the simple forms.
+                </li>
+                <li>
+                    Reactive forms: Reactive forms provide a model-driven approach to
+                    handling form inputs whose values change over time. It is used while
+                    designing more complex forms.
+                </li>
+            </ol>
+            <div class="alert is-helpful">
+                Reactive forms use an explicit and immutable approach to managing the
+                state of a form at a given point in time. Each change to the form state
+                returns a new state, which maintains the integrity of the model between
+                changes. Reactive forms are built around observable streams, where form
+                inputs and values are provided as streams of input values, which can be
+                accessed synchronously.
+            </div>
+            <ul>
+                <li>Required module: ReactiveFormsModule</li>
+                <li>Other useful utilities: <kbd class="bg-secondary">ng-bootstrap, material forms</kbd></li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="mt-4">Basic form and accessibility</h2>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="py-2 text-primary">Basic form</h4>
+            <form [formGroup]="userForm" (ngSubmit)="onSave()">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input formControlName="firstName" id="firstName" type="text" class="form-control"
+                            placeholder="Enter First Name">
+                        <div *ngIf="firstName.touched && firstName.invalid" class="alert alert-danger">
+                            First Name is required
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input formControlName="lastName" id="lastName" type="text" class="form-control"
+                            placeholder="Enter Last Name">
+                        <div *ngIf="lastName.touched && lastName.invalid" class="alert alert-danger">
+                            Last Name is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" formGroupName="address">
+                    <div class="form-group col-md-6">
+                        <label for="street">Street</label>
+                        <input formControlName="street" id="street" type="text" class="form-control"
+                            placeholder="Enter Steet" required />
+                        <div *ngIf="street.touched && street.invalid" class="alert alert-danger">
+                            Street Name is required
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="city">City</label>
+                        <input formControlName="city" id="city" type="text" class="form-control"
+                            placeholder="Enter City" required />
+                        <div *ngIf="city.touched && city.invalid" class="alert alert-danger">
+                            City is required
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="state">State</label>
+                        <input formControlName="state" id="state" type="text" class="form-control"
+                            placeholder="Enter Last Name" required />
+                        <div *ngIf="state.touched && state.invalid" class="alert alert-danger">
+                            State is required
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="zip">zip</label>
+                        <input formControlName="zip" id="zip" type="text" class="form-control"
+                            placeholder="Enter Last Name" required />
+                        <div *ngIf="zip.touched && zip.invalid" class="alert alert-danger">
+                            Zip code is required
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-outline-secondary ml-2" (click)="onClear()">Clear</button>
+            </form>
+
+            <!--Success and Error Messages-->
+            <div *ngIf="formInvalidFlag" class="alert is-critical" role="alert">
+                <span>Form is invalid.</span>
+            </div>
+
+            <!--Alert with close-->
+            <div *ngIf="sucessMessage != null" class="alert is-helpful mt-3" role="alert">
+                <span>{{ sucessMessage }}</span>
+                <button type="button ml-auto" class="close" aria-label="Close" (click)="onCloseMsg()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert is-helpful mt-3">
+                <span>Hit <kbd class="bg-secondary">Ctl+Shift+I</kbd> and click on console tab to see form in an
+                    action!</span>
+            </div>
+            <div class="alert is-important mt-3" role="alert">
+                <span>For "Clear" button, explicitly specify the button type as "button" else default action
+                    <em>submit</em>
+                    will be triggered resulting into <em>save</em> event.</span>
+            </div>
+        </div>
+
+        <div class="col-lg-6 border-left py-3">
+            <h4 class="py-2 text-primary">Different ways to access form</h4>
+            <h4>1. Using value changes observable</h4>
+            <code>this.[formName].get('[formControlName]').value</code>
+            <p>First Name: {{ this.userForm.get('firstName').value }}</p>
+
+            <h4>2. Using <em>getter</em> function (refer code for syntax)</h4>
+            <p>First Name: {{ firstName.value }}</p>
+
+            <h4>3. Using NgForm binded to formGroup - "userForm.value"</h4>
+            <p>Form value: {{userForm.value| json}}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Forms Validation</h2>
+            <p>Reactive forms come preloaded with validators that serve rudimentary validation use cases. For more
+                advanced use cases, write your custom validations.</p>
+            <ul>
+                <li><kbd class="is-code">Validators.required</kbd>: Use for mandatory field</li>
+                <li><kbd class="is-code">Validators.email</kbd>: Email validations</li>
+                <div class="alert is-helpful m-2">Email validator will return an error for an email entered in sentence
+                    case. Example - Joe.Dow@ExampleCompany.com. Consider using custom validation or provide an
+                    appropriate hint.</div>
+                <li><kbd class="is-code">Validators.minLength([length]), Validators.maxLength([length])</kbd>: User
+                    for min/max validation</li>
+            </ul>
+        </div>
+        <div class="col-lg-12">
+            <h4>Example</h4>
+            <ul>
+                <li>
+                    Simple validator<br>
+                    <span class="badge is-code">
+                        firstName: [' ', Validators]
+                    </span>
+                </li>
+                <li>
+                    Multiple validation using array<br>
+                    <span class="badge is-code">
+                        firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
+                    </span>
+                </li>
+            </ul>
+            <div class="alert is-important">
+                Above example are for form build using <em>Form Builder</em> tool. There are minor changes in syntax for
+                form build using FormGroup.
+            </div>
+        </div>
+    </div>
+
+<div class="row mt-4">
+    <h2>Try yourself!</h2>
+    <iframe class="border" width="100%" height="300" src="//jsfiddle.net/agharajubin/sgu0n3bp/5/embedded/js,html/"
+        allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+</div>

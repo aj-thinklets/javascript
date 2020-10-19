@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12">
+            <!--Example-1 for string Interpolation-->
+            <p>
+                Example-1: The {{ "Server" }} id of Server is {{ serverId }} and Server name
+                is {{ serverName }}
+            </p>
+            <hr />
+
+            <!--Example-2 for string Interpolation-->
+            <p>
+                Example-2: The {{ "Server" }} id of Server is {{ serverId }} and Server
+                Status is {{ getserverStatus() }}
+            </p>
+            <hr />
+
+            <!--Example-3 for property binding-->
+            <label>Example-3:</label>
+            <button [disabled]="!allownewServer" class="btn btn-primary">
+                Add Server
+            </button>
+            <hr />
+
+            <!--Example-4 for passing and using data with event binding-->
+            <label>Expample-4: Server Name</label>
+            <input tyle="text" class="form-control" (input)="onUpdateServerName($event)" />
+            <p>Event Emitter: {{ serverName }}</p>
+            <hr />
+
+            <!--Example-5 Data bindings-->
+            <label>Example 5 Data Binding<br /></label>
+            <input type="text" [(ngModel)]="username" class="form-control" />
+            <button [disabled]="username === ''" (click)="reset()" class="btn btn-primary">
+                Reset User
+            </button>
+            <hr />
+        </div>
+    </div>
+</div>
+
+<!--=====================
+    Angular Directives
+    ======================
+-->

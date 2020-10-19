@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #fcfcfc;
+  font-family: 'Roboto', sans-serif;
+  font-weight: '300';
+  color: #031b4e;
+}
+
+
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  //font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+.is-hepful,
+.is-important,
+.is-critical {
+  padding: 16px;
+  margin: 24px 0;
+  color: #444;
+}
+
+//alert styles
+.is-helpful {
+  border-left: 4px solid #1976d2;
+  background-color: rgba(25, 118, 210, 0.05);
+}
+
+.is-important {
+  border-left: 4px solid #ff9800;
+  background-color: rgba(255, 152, 0, 0.05);
+}
+
+.is-critical {
+  border-left: 4px solid #dd0031;
+  background-color: rgba(221, 0, 49, 0.05);
+}
+
+
+//Code block
+.is-code {
+  background-color: #F2F2F2;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 8px;
+  color: #031b4e;
+}
+
+.is-badge {
+  background-color: #f3e5f5;
+}
