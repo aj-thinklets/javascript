@@ -1,0 +1,28 @@
+.wrapper > div {
+    padding: 2rem;
+    background: #eee;
+}
+
+.wrapper > div:nth-child(odd) {
+    background: #ddd;
+}
+
+/* Grid */
+/* .wrapper {
+     display: grid;
+     grid-template-columns: 1fr 2fr 1fr;
+     gap: 2rem;
+} */
+
+
+
+/* Using minmax()
+- Minium grid-column width of 250px else fallback to 1fraction or take full width
+*/
+
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
