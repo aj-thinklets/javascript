@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display:grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-auto-rows: minmax(300px, auto);
+    border: 1px solid red;
+    justify-items: stretch;
+}
+
+
+.wrapper > div {
+    padding: 1em;
+    border: 4px solid green;
+    background: rgb(19, 61, 248);
+}
+
+.wrapper > div:nth-child(odd) {
+    background: #ddd;
+}
+

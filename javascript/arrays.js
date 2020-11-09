@@ -7,7 +7,6 @@
 // console.log("Third pen: ", thirdPen);
 
 
-
 // //PROPERTIES -- LENGTH, SPLICE, POP, SLICE, PUSH, INDEXOF, JOIN;
 // //Get the array length
 // console.log("Array Length: ", pens.length);
